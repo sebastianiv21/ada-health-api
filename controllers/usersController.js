@@ -10,7 +10,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
   // devuelve la informacion de los usuarios excepto la contraseña
   // el metodo lean sirve para traer solo el json y no incluir otra informacion y metodos que contiene el llamado a users. Se usa sólo para consultas ya que si se quiere guardar un registro, se debe evitar usarlo
   const users = await User.find().select('-password').lean()
-  if (!users) {
+  if (!users?.length) {
     return res.status(400).json({ message: 'No se encontraron usuarios' })
   }
   res.json(users)
@@ -174,7 +174,6 @@ const udpateUser = asyncHandler(async (req, res) => {
     !rh ||
     !eps ||
     !email ||
-    !password ||
     !Array.isArray(roles) ||
     !roles.length ||
     typeof active !== 'boolean'
@@ -191,6 +190,7 @@ const udpateUser = asyncHandler(async (req, res) => {
   // check for duplicate
   const duplicate = await User.findOne({ idNumber }).lean().exec()
   // allow updates to the original user
+  // se asegura de que el usuario a actualizar sea el que corresponde
   if (duplicate && duplicate?._id.toString() !== id) {
     return res
       .status(409)
@@ -246,8 +246,8 @@ const deleteUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: 'Se require id del usuario' })
   }
 
-  const tests = await Test.findOne({ user: id }).lean().exec()
-  if (notes?.length) {
+  const test = await Test.findOne({ user: id }).lean().exec()
+  if (test) {
     return res
       .status(400)
       .json({ message: 'El usuario tiene pruebas asignadas' })
