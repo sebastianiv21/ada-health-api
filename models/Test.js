@@ -7,6 +7,10 @@ const testSchema = mongoose.Schema(
       required: true,
       ref: 'User',
     },
+    reference: {
+      type: String,
+      required: true,
+    },
     result: {
       type: String,
       required: true,

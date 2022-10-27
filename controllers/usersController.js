@@ -68,7 +68,7 @@ const createNewUser = asyncHandler(async (req, res) => {
     !roles.length
   ) {
     // return bad request status with json
-    return res.status(400).json({ message: 'Rellene los campos requeridos' })
+    return res.status(400).json({ message: 'Ingrese los campos requeridos' })
   }
 
   // check for duplicates
@@ -130,7 +130,7 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @desc Update a user
 // @route PATCH /users
 // @access Private
-const udpateUser = asyncHandler(async (req, res) => {
+const updateUser = asyncHandler(async (req, res) => {
   const {
     id,
     idType,
@@ -178,7 +178,7 @@ const udpateUser = asyncHandler(async (req, res) => {
     !roles.length ||
     typeof active !== 'boolean'
   ) {
-    return res.status(400).json({ message: 'Rellene los campos requeridos' })
+    return res.status(400).json({ message: 'Ingrese los campos requeridos' })
   }
 
   const user = await User.findById(id).exec()
@@ -243,7 +243,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   if (!id) {
     // bad request
-    return res.status(400).json({ message: 'Se require id del usuario' })
+    return res.status(400).json({ message: 'Se require ID del usuario' })
   }
 
   const test = await Test.findOne({ user: id }).lean().exec()
@@ -261,7 +261,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   const result = await user.deleteOne()
 
-  const reply = `Usuario ${result.name} ${result.lastname} con ID ${result._id} eliminado`
+  const reply = `Usuario ${result.name} ${result.lastname} con número de identificación ${result.idNumber} eliminado`
 
   res.json(reply)
 })
@@ -269,6 +269,6 @@ const deleteUser = asyncHandler(async (req, res) => {
 module.exports = {
   getAllUsers,
   createNewUser,
-  udpateUser,
+  updateUser,
   deleteUser,
 }
