@@ -20,7 +20,7 @@ const getAllTests = asyncHandler(async (req, res) => {
     tests.map(async (test) => {
       // se usa exec porque se esta pasando un parametro de busqueda
       const user = await User.findById(test.user)
-        .select('-password')
+        .select('-password -_id')
         .lean()
         .exec()
       return { ...test, ...user }
