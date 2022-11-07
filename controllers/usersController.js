@@ -26,16 +26,14 @@ const createNewUser = asyncHandler(async (req, res) => {
     idNumber,
     name,
     lastname,
-    secLastname,
     birthDate,
     gender,
     bloodType,
     rh,
     maritalStatus,
     eps,
-    homePhone,
-    mobilePhone,
-    workPhone,
+    personalPhone,
+    personalPhone2,
     address,
     city,
     department,
@@ -46,7 +44,6 @@ const createNewUser = asyncHandler(async (req, res) => {
     password,
     contactName,
     contactLastname,
-    contactSecLastname,
     contactRelationship,
     contactPhone,
   } = req.body
@@ -63,6 +60,7 @@ const createNewUser = asyncHandler(async (req, res) => {
     !rh ||
     !eps ||
     !email ||
+    !personalPhone ||
     !password ||
     !Array.isArray(roles) ||
     !roles.length
@@ -88,16 +86,14 @@ const createNewUser = asyncHandler(async (req, res) => {
     idNumber,
     name,
     lastname,
-    secLastname,
     birthDate,
     gender,
     bloodType,
     rh,
     maritalStatus,
     eps,
-    homePhone,
-    mobilePhone,
-    workPhone,
+    personalPhone,
+    personalPhone2,
     address,
     city,
     department,
@@ -108,7 +104,6 @@ const createNewUser = asyncHandler(async (req, res) => {
     password: hashedPwd,
     contactName,
     contactLastname,
-    contactSecLastname,
     contactRelationship,
     contactPhone,
   }
@@ -137,16 +132,14 @@ const updateUser = asyncHandler(async (req, res) => {
     idNumber,
     name,
     lastname,
-    secLastname,
     birthDate,
     gender,
     bloodType,
     rh,
     maritalStatus,
     eps,
-    homePhone,
-    mobilePhone,
-    workPhone,
+    personalPhone,
+    personalPhone2,
     address,
     city,
     department,
@@ -156,7 +149,6 @@ const updateUser = asyncHandler(async (req, res) => {
     password,
     contactName,
     contactLastname,
-    contactSecLastname,
     contactRelationship,
     contactPhone,
   } = req.body
@@ -173,6 +165,7 @@ const updateUser = asyncHandler(async (req, res) => {
     !bloodType ||
     !rh ||
     !eps ||
+    !personalPhone ||
     !email ||
     !Array.isArray(roles) ||
     !roles.length ||
@@ -201,16 +194,14 @@ const updateUser = asyncHandler(async (req, res) => {
   user.idNumber = idNumber
   user.name = name
   user.lastname = lastname
-  user.secLastname = secLastname
   user.birthDate = birthDate
   user.gender = gender
   user.bloodType = bloodType
   user.rh = rh
   user.maritalStatus = maritalStatus
   user.eps = eps
-  user.homePhone = homePhone
-  user.mobilePhone = mobilePhone
-  user.workPhone = workPhone
+  user.personalPhone = personalPhone
+  user.personalPhone2 = personalPhone2
   user.address = address
   user.city = city
   user.department = department
@@ -219,7 +210,6 @@ const updateUser = asyncHandler(async (req, res) => {
   user.email = email
   user.contactName = contactName
   user.contactLastname = contactLastname
-  user.contactSecLastname = contactSecLastname
   user.contactRelationship = contactRelationship
   user.contactPhone = contactPhone
 

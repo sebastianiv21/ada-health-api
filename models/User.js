@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    secLastname: String,
     // Informacion general
     birthDate: {
       type: Date,
@@ -44,9 +43,11 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
     // Datos de localizacion
-    homePhone: Number,
-    mobilePhone: Number,
-    workPhone: Number,
+    personalPhone: {
+      type: Number,
+      required: true,
+    },
+    personalPhone2: Number,
     address: String,
     city: String,
     department: String,
@@ -73,7 +74,6 @@ const userSchema = new mongoose.Schema(
     // Información de contacto
     contactName: String,
     contactLastname: String,
-    contactSecLastname: String,
     contactRelationship: String,
     contactPhone: Number,
   },
