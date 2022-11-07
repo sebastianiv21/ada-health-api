@@ -37,7 +37,8 @@ const createNewUser = asyncHandler(async (req, res) => {
     address,
     city,
     department,
-    roles,
+    // no se envia role porque el valor por defecto es paciente
+    // role,
     // No se envia active porque su valor por defecto es correcto y no se debe modificar en esta ruta
     // active,
     email,
@@ -61,9 +62,9 @@ const createNewUser = asyncHandler(async (req, res) => {
     !eps ||
     !email ||
     !personalPhone ||
-    !password ||
-    !Array.isArray(roles) ||
-    !roles.length
+    !password //||
+    //!Array.isArray(role) ||
+    //!role.length
   ) {
     // return bad request status with json
     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
@@ -97,7 +98,8 @@ const createNewUser = asyncHandler(async (req, res) => {
     address,
     city,
     department,
-    roles,
+    // no se envia porque tiene valor por defecto
+    // role,
     // No se envia active porque su valor por defecto es correcto y no se debe modificar en esta ruta
     // active,
     email,
@@ -143,7 +145,7 @@ const updateUser = asyncHandler(async (req, res) => {
     address,
     city,
     department,
-    roles,
+    role,
     active,
     email,
     password,
@@ -167,8 +169,10 @@ const updateUser = asyncHandler(async (req, res) => {
     !eps ||
     !personalPhone ||
     !email ||
-    !Array.isArray(roles) ||
-    !roles.length ||
+    !role ||
+    role !== 'Paciente' ||
+    role !== 'Personal Médico' ||
+    role !== 'Administrador' ||
     typeof active !== 'boolean'
   ) {
     return res.status(400).json({ message: 'Ingrese los campos requeridos' })
@@ -205,7 +209,7 @@ const updateUser = asyncHandler(async (req, res) => {
   user.address = address
   user.city = city
   user.department = department
-  user.roles = roles
+  user.role = role
   user.active = active
   user.email = email
   user.contactName = contactName

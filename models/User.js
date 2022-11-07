@@ -52,12 +52,10 @@ const userSchema = new mongoose.Schema(
     city: String,
     department: String,
     // Información de la sesión
-    roles: [
-      {
-        type: String,
-        default: 'Paciente',
-      },
-    ],
+    role: {
+      type: String,
+      default: 'Paciente',
+    },
     active: {
       type: Boolean,
       default: true,
